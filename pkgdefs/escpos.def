@@ -1,0 +1,13 @@
+pkg_format=1
+pkg_desc="tcl-escpos"
+pkg_description="easy access to ESC/POS printer commands"
+pkg_homepage="https://github.com/bef/tcl-escpos"
+pkg_download_info_url="$pkg_homepage"
+pkg_version="0.2"
+pkg_url="https://github.com/bef/tcl-escpos/tarball/master"
+pkg_checksum="sha256:cb31668378afb4e2ac52e13009463408722ae8f29d6070bfe84000959c5efad8"
+pkg_requires=( tcl.gd )
+
+function pkg_deploy() {
+	pkg_deploy_builddir
+}

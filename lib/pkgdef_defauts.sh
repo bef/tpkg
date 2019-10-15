@@ -1,0 +1,11 @@
+pkg_format=1
+pkg_desc=""
+pkg_description=""
+pkg_homepage=""
+pkg_download_info_url=""
+pkg_version=""
+pkg_url=""
+pkg_checksum=""
+pkg_archive_filename=""
+pkg_archive_extension="tar.gz"
+pkg_requires=( )

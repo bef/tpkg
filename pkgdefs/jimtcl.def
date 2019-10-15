@@ -1,0 +1,27 @@
+pkg_format=1
+pkg_desc="small-footprint implementation of the Tcl"
+pkg_description="Jim is an opensource small-footprint implementation of the Tcl programming language. It implements a large subset of Tcl and adds new features like references with garbage collection, closures, built-in Object Oriented Programming system, Functional Programming commands, first-class arrays and UTF-8 support. All this with a binary size of about 100-200kB (depending upon selected options)."
+pkg_homepage="http://jim.tcl.tk/"
+pkg_download_info_url="https://github.com/msteveb/jimtcl/releases"
+pkg_version="0.78"
+pkg_url="https://github.com/msteveb/jimtcl/archive/${pkg_version}.tar.gz"
+pkg_checksum="sha256:cf801795c9fd98bfff6882c14afdf96424ba86dead58c2a4e15978b176d3e12b"
+
+function pkg_configure() {
+	call ./configure --prefix="$tpkg_base/jimtcl" --full
+}
+
+function pkg_make() {
+	call make
+}
+
+function pkg_deploy() {
+	call make install
+}
+
+function pkg_post_deploy() {
+	if [[ ! -d "${tpkg_base}/bin" ]]; then
+		call mkdir -p "${tpkg_base}/bin"
+	fi
+	call ln -sf "${tpkg_base}/jimtcl/bin/jimsh" "${tpkg_base}/bin/"
+}
