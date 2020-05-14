@@ -111,6 +111,7 @@ function print_usage() {
 	msg "  info <pkg>         print package details"
 	msg "  install <pkg...>   "
 	msg "  clean              remove cached downloads"
+	msg "  reset_all          remove all installed packages"
 	msg_debug "OR do a more granular installation:"
 	msg_debug "  download <pkg>     download source and verify checksum"
 	msg_debug "  extract <pkg>      extract package to work dir"
@@ -204,7 +205,7 @@ function pkg_check_checksum() {
 	if [[ ! -z "$pkg_checksum" ]]; then
 		msg_debug "checking checksum"
 		if ! check_checksum "$pkg_archive" "$pkg_checksum"; then
-			msg_warning "found archive with invalid checksum: $pkg_archive"
+			msg_warning "found archive with invalid checksum: $pkg_archive (sha256:$(calculate_checksum sha256 "$pkg_archive"))"
 			return 1
 		fi
 	else
@@ -365,8 +366,27 @@ function do_cleanup() {
 
 function do_clean() {
 	if readinput_yesno -d y "remove all archives in $tpkg_archivedir?"; then
-		call rm -rf -- "$tpkg_archivedir/*"
+		call rm -rf -- "$tpkg_archivedir"/*
 	fi
+}
+
+function do_reset_all() {
+	local -a dirlist=( "$tpkg_receiptsdir" "$tpkg_workdir" "$tpkg_base/jimtcl" )
+
+	msg "Directories to remove:"
+	for dir in "${dirlist[@]}"; do
+		msg "$dir"
+	done
+	msg "$tpkg_base/{bin,include,lib,man,share}"
+	
+	if readinput_yesno -d n "DELETE THEM ALL?"; then
+		call rm -rf -- "${dirlist[@]}" "$tpkg_base"/{bin,include,lib,man,share}
+	fi
+	if readinput_yesno -d n "remove all archives in $tpkg_archivedir?"; then
+		call rm -rf -- "$tpkg_archivedir"/*
+	fi
+	call mkdir -p "$tpkg_base/bin"
+	call ln -s "$tpkg_base/tpkg" "$tpkg_base/bin/tpkg"
 }
 
 ## complete install
