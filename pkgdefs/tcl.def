@@ -3,9 +3,9 @@ pkg_desc="Tcl"
 pkg_description="Tcl (Tool Command Language) is a very powerful but easy to learn dynamic programming language, suitable for a very wide range of uses, including web and desktop applications, networking, administration, testing and many more. Open source and business-friendly, Tcl is a mature yet evolving language that is truly cross platform, easily deployed and highly extensible."
 pkg_homepage="http://tcl.tk/"
 pkg_download_info_url="http://tcl.tk/software/tcltk/download.html"
-pkg_version="8.6.9"
+pkg_version="8.6.10"
 pkg_url="ftp://ftp.tcl.tk/pub/tcl/tcl8_6/tcl${pkg_version}-src.tar.gz"
-pkg_checksum="sha256:ad0cd2de2c87b9ba8086b43957a0de3eb2eb565c7159d5f53ccbba3feb915f4e"
+pkg_checksum="sha256:5196dbf6638e3df8d5c87b5815c8c2b758496eb6f0e41446596c9a4e638d87ed"
 
 function pkg_configure() {
 	cd unix
