@@ -2,7 +2,7 @@ pkg_format=1
 pkg_desc="expect"
 pkg_description="Expect is a tool for automating interactive applications such as telnet, ftp, passwd, fsck, rlogin, tip, etc. Expect really makes this stuff trivial. Expect is also useful for testing these same applications."
 pkg_homepage="https://core.tcl.tk/expect/index?name=Expect#unix"
-pkg_download_info_url="https://core.tcl.tk/tcllib/wiki?name=Downloads"
+pkg_download_info_url="https://sourceforge.net/projects/expect/files/Expect/"
 pkg_version="5.45.4"
 pkg_url="https://sourceforge.net/projects/expect/files/Expect/$pkg_version/expect$pkg_version.tar.gz"
 pkg_checksum="sha256:49a7da83b0bdd9f46d04a04deec19c7767bb9a323e40c4781f89caf760b92c34"

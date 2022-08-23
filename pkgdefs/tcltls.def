@@ -3,9 +3,9 @@ pkg_desc="TLS for Tcl"
 pkg_description="This extension provides a generic binding to OpenSSL, utilizing the Tcl_StackChannel API for Tcl 8.2 and higher."
 pkg_homepage="https://core.tcl-lang.org/tcltls/home"
 pkg_download_info_url="https://core.tcl-lang.org/tcltls/wiki/Download"
-pkg_version="1.7.21"
+pkg_version="1.7.22"
 pkg_url="https://core.tcl-lang.org/tcltls/uv/tcltls-${pkg_version}.tar.gz"
-pkg_checksum="sha256:806ae405250810f8d57a8ca6fce01d8ae40e72443728d1569069126bb5cbc175"
+pkg_checksum="sha256:e84e2b7a275ec82c4aaa9d1b1f9786dbe4358c815e917539ffe7f667ff4bc3b4"
 
 function pkg_configure() {
 	call ./configure --prefix="$TCL_PREFIX" --exec-prefix="$TCL_EXEC_PREFIX" --with-tcl="$tpkg_tcllibdir" --disable-sslv2 --disable-sslv3 --with-openssl-dir="/usr/local/opt/libressl"

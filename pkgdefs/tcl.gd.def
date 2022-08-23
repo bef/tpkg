@@ -3,9 +3,9 @@ pkg_desc="Tcl interface to the GD drawing library"
 pkg_description="This is tcl.gd, a new Tcl interface to the GD drawing library that is nearly 100% feature complete with GD, far more complete with gd 2 than Gdtclft."
 pkg_homepage="https://flightaware.github.io/tcl.gd/"
 pkg_download_info_url="https://github.com/flightaware/tcl.gd/releases"
-pkg_version="1.3"
-pkg_url="https://github.com/flightaware/tcl.gd/archive/v${pkg_version}.tar.gz"
-pkg_checksum="sha256:7e388e8c8784e093c55a3ef6722666f1d90bc81377fba802fa7ba38371020413"
+pkg_version="1.3.1"
+pkg_url="https://github.com/flightaware/tcl.gd/archive/refs/tags/v${pkg_version}.tar.gz"
+pkg_checksum="sha256:00d048d6084e3cf9cb68b4540402d51ceab93b423f55a1741d6c3fb978385cba"
 
 function pkg_configure() {
 	if [[ ! -f "configure" ]]; then

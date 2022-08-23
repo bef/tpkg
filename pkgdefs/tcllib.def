@@ -3,9 +3,9 @@ pkg_desc="Tcllib"
 pkg_description="Tcllib is a collection of utility modules for Tcl. These modules provide a wide variety of functionality, from implementations of standard data structures to implementations of common networking protocols. The intent is to collect commonly used function into a single library, which users can rely on to be available and stable."
 pkg_homepage="https://wiki.tcl.tk/1246"
 pkg_download_info_url="https://core.tcl.tk/tcllib/wiki?name=Downloads"
-pkg_version="1.20"
+pkg_version="1.21"
 pkg_url="https://core.tcl.tk/tcllib/uv/tcllib-${pkg_version}.tar.gz"
-pkg_checksum="sha256:e3b097475bcb93c4439df4a088daa59592e1937beee2a2c8495f4f0303125d71"
+pkg_checksum="sha256:46b2bb5ec8049363ae01645af11bda3bdb5db10629e807d81d1ad46cd1bead50"
 
 function pkg_configure() {
 	call ./configure --prefix="$TCL_PREFIX" --exec-prefix="$TCL_EXEC_PREFIX" --with-tclsh="$TCLSH"
