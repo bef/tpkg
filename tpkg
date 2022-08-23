@@ -389,7 +389,7 @@ function do_reset_all() {
 		call rm -rf -- "$tpkg_archivedir"/*
 	fi
 	call mkdir -p "$tpkg_base/bin"
-	call ln -s "$tpkg_base/tpkg" "$tpkg_base/bin/tpkg"
+	call ln -s "$tpkg_base/tpkg/tpkg" "$tpkg_base/bin/tpkg"
 }
 
 ## complete install
