@@ -250,6 +250,9 @@ function pkg_extract() {
 	*.tar.gz)
 		tar zxf "$pkg_archive" -C "$pkg_builddir" --strip-components 1
 		;;
+	*.tar.bz2)
+		tar jxf "$pkg_archive" -C "$pkg_builddir" --strip-components 1
+		;;
 	*)
 		msg_error "$pkg_archive_filename: unknown archive type"
 		return 1
