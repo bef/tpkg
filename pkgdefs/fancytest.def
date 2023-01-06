@@ -1,0 +1,12 @@
+pkg_format=1
+pkg_desc="fancy test framework"
+pkg_description="very simple and slim yet fancy test framework"
+pkg_homepage="https://github.com/bef/fancytest"
+pkg_download_info_url="$pkg_homepage"
+pkg_version="0.1"
+pkg_url="https://github.com/bef/fancytest/archive/refs/tags/v${pkg_version}.tar.gz"
+pkg_checksum="sha256:e0b10d813dbe7ed2e271711f01708dd3c77ee1298e115310df4774ccc9b21032"
+
+function pkg_deploy() {
+	pkg_deploy_builddir
+}
