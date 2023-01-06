@@ -6,7 +6,7 @@ TPKG is a prototype implementation of a Tcl installer and package manager.
 ## Why did I write TPKG?
 The state of package management in the Tcl world is somewhat unresolved. There is TEApod, developed by ActiveState, which is commercially motivated and may or may not be actively maintained. Then there are numerous binary Tcl distributions, which come with a lot of packages preinstalled. Also, there is no central repository of packages, however several attempts have been made, most notably [GUTTER](https://core.tcl-lang.org/jenglish/gutter/) and a loose list of packages under the [Category Package](https://wiki.tcl-lang.org/page/Category+Package) in the Tcler's Wiki. A format for meta data associated with packages was proposed with [TIP 55](https://core.tcl-lang.org/tips/doc/trunk/tip/55.md) as well.
 
-All in all package management seems to be a burning topic in the Tcl community and at the The 26th Annual Tcl/Tk Conference (aka Tcl 2019), too. I am really looking forward to their ideas and conclusions.
+All in all package management seems to be a burning topic in the Tcl community and at the The 26th Annual Tcl/Tk Conference (aka Tcl 2019), too.
 
 So, in the end I wanted a stable, reproducible Tcl installations from source, not unlike what BSD ports or homebrew on MacOS provide for system packages. And I wanted it today. Due to lack of viable candidates I wrote this working proof-of-concept prototype and this is it.
 
@@ -41,3 +41,6 @@ That's it. Now let's install Tcl: (-v generates more messages to look at)
 tpkg -v install tcl
 ...
 ```
+
+## Notes
+* The package name *tpkg* collides with other projects, e.g. *toitlang/tpkg*, *github.com/tpkg* and *NLnetLabs/tpkg*. The project may be renamed some time in the future.
