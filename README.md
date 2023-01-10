@@ -23,7 +23,12 @@ After experimenting with the idea of a pure-Tcl installer (and writing five prot
 ## Missing Features
 A lot. Please provide comments, feature requests or pull requests via github.
 
-## Quick installation
+## Quick Installation
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bef/tpkg/master/install-tpkg.sh)"
+```
+
+## Manual Installation
 TPKG resides in `/opt/tpkg` by default, but you may choose to clone it anywhere and set `TPKG_BASE` accordingly.
 ```
 cd /opt
