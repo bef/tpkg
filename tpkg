@@ -2,7 +2,7 @@
 ##
 ## TPKG - The Tcl Package Manager
 ##
-## Copyright 2019 Ben Fuhrmannek
+## Copyright 2019-2023 Ben Fuhrmannek
 ##
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 ## limitations under the License.
 ##
 
-tpkg_version=0.1dev1
+tpkg_version=0.1dev2
 tpkg_base="${TPKG_BASE:-/opt/tpkg}"
 
 tpkg_pkgdefs="${TPKG_PKGDEFS:-$tpkg_base/tpkg/pkgdefs}"
@@ -71,8 +71,8 @@ fi
 ##
 
 function banner() {
-	msg "This is TPKG, the Tcl Package Manager, version $tpkg_version"
-	msg "  (c) 2019 Ben Fuhrmannek, licensed under the Apache 2.0 License"
+	msg "This is TPKG, the Tcl Package Manager, version $tpkg_version (proof of concept)"
+	msg "  (c) 2019-2023 Ben Fuhrmannek, licensed under the Apache 2.0 License"
 	msg "  https://github.com/bef/tpkg"
 	msg ""
 	msg "   BASE: $tpkg_base"
@@ -447,16 +447,29 @@ function do_install() {
 
 ## LIST
 function do_list() {
-	set +e
-	for pkg_name in $(ls $tpkg_pkgdefs/*.def |xargs basename -s .def); do
-		(
-			set -e
-			read_pkg_info "$pkg_name"
-			echo "$pkg_name $pkg_version"
-			echo "  $pkg_desc"
-			echo ""
-		)
-	done
+	case "$1" in
+	i|installed)
+		for pkg_name in $(ls "$tpkg_receiptsdir"|sort); do
+			read_pkg_receipt
+			if [[ "$pkg_installed_status" != "installed" ]]; then
+				continue
+			fi
+			echo "$pkg_name $pkg_installed_version $pkg_installed_status"
+		done
+	;;
+	*)
+		set +e
+		for pkg_name in $(ls $tpkg_pkgdefs/*.def |xargs basename -s .def); do
+			(
+				set -e
+				read_pkg_info "$pkg_name"
+				echo "$pkg_name $pkg_version"
+				echo "  $pkg_desc"
+				echo ""
+			)
+		done
+	;;
+	esac
 	return
 }
 
