@@ -108,10 +108,11 @@ function print_usage() {
 	msg "<CMD> can be any of the following:"
 	# msg "  search <expression>"
 	msg "  list               list all available packages with short descriptions"
+	msg "  list installed     list installed packages"
 	msg "  info <pkg>         print package details"
-	msg "  install <pkg...>   "
+	msg "  install [-f] <pkg...>"
 	msg "  clean              remove cached downloads"
-	msg "  reset_all          remove all installed packages"
+	msg_debug "  reset_all          remove all installed packages"
 	msg_debug "OR do a more granular installation:"
 	msg_debug "  download <pkg>     download source and verify checksum"
 	msg_debug "  extract <pkg>      extract package to work dir"
@@ -192,15 +193,6 @@ function do_info() {
 
 ## DOWNLOAD
 
-function pkg_pre_download() {
-	return
-}
-function pkg_download() {
-	call $CURL -o "$pkg_archive" --progress-bar --location "$pkg_url"
-}
-function pkg_post_download() {
-	pkg_check_checksum
-}
 function pkg_check_checksum() {
 	if [[ ! -z "$pkg_checksum" ]]; then
 		msg_debug "checking checksum"
@@ -242,26 +234,6 @@ function do_download() {
 
 ## EXTRACT
 
-function pkg_pre_extract() {
-	return
-}
-function pkg_extract() {
-	case "$pkg_archive_filename" in
-	*.tar.gz)
-		tar zxf "$pkg_archive" -C "$pkg_builddir" --strip-components 1
-		;;
-	*.tar.bz2)
-		tar jxf "$pkg_archive" -C "$pkg_builddir" --strip-components 1
-		;;
-	*)
-		msg_error "$pkg_archive_filename: unknown archive type"
-		return 1
-	esac
-}
-function pkg_post_extract() {
-	return
-}
-
 function do_extract() {
 	local pkg_name="$1"
 	checkarg_pkg "$pkg_name"
@@ -283,26 +255,6 @@ function do_extract() {
 
 ## CONFIGURE / MAKE
 
-function pkg_pre_configure() {
-	cd "$pkg_builddir"
-}
-function pkg_configure() {
-	msg_debug "nothing to configure"
-	return
-}
-function pkg_post_configure() {
-	return
-}
-function pkg_pre_make() {
-	return
-}
-function pkg_make() {
-	msg_debug "nothing to make"
-	return
-}
-function pkg_post_make() {
-	return
-}
 function do_build() {
 	local pkg_name="$1"
 	checkarg_pkg "$pkg_name"
@@ -324,16 +276,6 @@ function do_build() {
 
 ## DEPLOY (after building)
 
-function pkg_pre_deploy() {
-	cd "$pkg_builddir"
-}
-function pkg_deploy() {
-	msg_debug "nothing to deploy."
-	return
-}
-function pkg_post_deploy() {
-	return
-}
 function pkg_deploy_builddir() {
 	call cp -a "$pkg_builddir" "$tpkg_tcllibdir/${pkg_name}${pkg_version}"
 }
@@ -417,6 +359,15 @@ function calculate_deps() (
 )
 
 function do_install() {
+	local force_install=0
+	while true; do
+		case "$1" in
+		-f) force_install=1 ;;
+		*) break ;;
+		esac
+		shift
+	done
+
 	for pkg_name in "$@"; do
 		if ! pkg_exists "$pkg_name"; then
 			msg_error "$pkg_name: package not found"
@@ -427,11 +378,9 @@ function do_install() {
 	local -a pkglist=( $(calculate_deps "$@") )
 
 	for pkg_name in "${pkglist[@]}"; do
-		if read_pkg_receipt; then
-			if [[ "$pkg_installed_status" == "installed" ]]; then
-				msg_debug "$pkg_name is already installed"
-				continue
-			fi
+		if [[ $force_install -eq 0 ]] && read_pkg_receipt && [[ "$pkg_installed_status" == "installed" ]]; then
+			msg_debug "$pkg_name is already installed"
+			continue
 		fi
 		msg "Installing $pkg_name..."
 		( do_download $pkg_name )
