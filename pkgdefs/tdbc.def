@@ -1,0 +1,10 @@
+pkg_format=1
+pkg_desc="Tcl DataBase Connectivity"
+pkg_description="Tcl interface standard for SQL databases and connectivity"
+pkg_homepage="http://tdbc.tcl.tk/"
+pkg_download_info_url="https://sourceforge.net/projects/tcl/files/TDBC/"
+pkg_version="1.1.5"
+pkg_url="https://sourceforge.net/projects/tcl/files/TDBC/$pkg_version/${pkg_name}${pkg_version}.tar.gz"
+pkg_checksum="sha256:1cdbbee29083757c515cf7fb369c2db9b6b27fd29c6f1c0646ef08877b992570"
+
+. "$tpkg_libdir/tpkgdef_std_conf_make.sh"

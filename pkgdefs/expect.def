@@ -7,15 +7,4 @@ pkg_version="5.45.4"
 pkg_url="https://sourceforge.net/projects/expect/files/Expect/$pkg_version/expect$pkg_version.tar.gz"
 pkg_checksum="sha256:49a7da83b0bdd9f46d04a04deec19c7767bb9a323e40c4781f89caf760b92c34"
 
-
-function pkg_configure() {
-	call ./configure --prefix="$TCL_PREFIX" --with-tcl="$TCL_PREFIX/lib" --enable-64bit --enable-threads
-}
-
-function pkg_make() {
-	call make -j4
-}
-
-function pkg_deploy() {
-	call make install
-}
+. "$tpkg_libdir/tpkgdef_std_conf_make.sh"

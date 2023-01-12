@@ -1,0 +1,13 @@
+. "${tpkg_pkgdefs}/tdbc.def"
+pkg_format=1
+pkg_desc="tdbc sqlite3 driver"
+pkg_description="Tcl DataBase Connectivity SQLite3 Driver"
+pkg_url="https://sourceforge.net/projects/tcl/files/TDBC/$pkg_version/${pkg_name}-${pkg_version}.tar.gz"
+pkg_checksum="sha1:8e2e4697d5672000018e7de8beed3d3a350d0a5f"
+pkg_requires=( tdbc )
+
+. "$tpkg_libdir/tpkgdef_std_conf_make.sh"
+
+function pkg_configure() {
+	call ./configure "${pkg_std_configure_flags[@]}" --with-tdbc="${tpkg_tcllibdir}/tdbc${pkg_version}"
+}
