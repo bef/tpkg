@@ -1,0 +1,10 @@
+pkg_format=1
+pkg_desc="Tcl Interface to CURL"
+pkg_description="get a URL with FTP, TELNET, LDAP, DICT, FILE, HTTP or HTTPS syntax"
+pkg_homepage="https://github.com/flightaware/tclcurl-fa"
+pkg_download_info_url="https://github.com/flightaware/tclcurl-fa"
+pkg_version="7.22.0"
+pkg_url="https://github.com/flightaware/tclcurl-fa/archive/ed4856901dee2784ceeb6d2ee0d621fe05aa0134.tar.gz"
+pkg_checksum="sha256:f1a08c9754a5a00d11ffcfe368707f41f778c811ba5abf0c0b795750195e2296"
+
+. "$tpkg_libdir/tpkgdef_std_conf_make.sh"

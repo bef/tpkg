@@ -1,0 +1,27 @@
+pkg_format=1
+pkg_desc="XML library"
+pkg_description="a XML / DOM / XPath / XSLT / HTML / JSON implementation for Tcl"
+pkg_homepage="http://tdom.org/"
+pkg_download_info_url="http://tdom.org/downloads/"
+pkg_version="0.9.3"
+pkg_url="http://tdom.org/downloads/tdom-${pkg_version}-src.tar.gz"
+pkg_checksum="sha256:b46bcb6750283bcf41bd6f220cf06e7074752dc8b9a87a192bd81e53caad53f9"
+
+function pkg_configure() {
+    cd "$pkg_builddir/unix"
+	if [[ -f Makefile ]]; then
+		return
+	fi
+
+	call ../configure "${pkg_std_configure_flags[@]}"
+}
+
+function pkg_make() {
+	cd "$pkg_builddir/unix"
+	call make -j4
+}
+
+function pkg_deploy() {
+	cd "$pkg_builddir/unix"
+	call make install
+}

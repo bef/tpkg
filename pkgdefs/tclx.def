@@ -1,0 +1,18 @@
+pkg_format=1
+pkg_desc="Extended Tcl"
+pkg_description="TclX provides access to the features exposed by API of POSIX systems such Unix."
+pkg_homepage="https://wiki.tcl-lang.org/page/TclX"
+pkg_download_info_url="https://github.com/flightaware/tclx/releases"
+pkg_version="8.4.4"
+pkg_url="https://github.com/flightaware/tclx/archive/refs/tags/v${pkg_version}.tar.gz"
+pkg_checksum="sha256:44d834d0996e9a7bbaf22d85d9dc17eac2ccc43ab0243a21087e3944c7bc3825"
+
+. "$tpkg_libdir/tpkgdef_std_conf_make.sh"
+
+function pkg_pre_make() {
+	msg_debug "Applying panic patch..."
+	if grep -q 'panic' generic/*.c; then
+		sed -i -- 's/panic/Tcl_Panic/' generic/*.c
+	fi
+}
+
